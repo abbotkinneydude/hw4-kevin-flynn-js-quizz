@@ -151,8 +151,8 @@ var jsCountdown = 600;
 function countdown() {
 var countMechanism = setInterval(function(){
     jsCountdown--;
-    $("#startButton").textContent = jsCountdown + " seconds remaining";
-    $("#score").innerHTML = score;
+    document.getElementById("startButton").value = jsCountdown + " seconds remaining";
+    document.getElementById("score").innerHTML = score;
 
   if(jsCountdown === 0)
     {clearInterval(countMechanism);
