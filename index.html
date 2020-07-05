@@ -38,13 +38,17 @@
           <div class="row" id="countDownRow">
             <div class="col md-12" style="text-align: center;">
 
-                <input type="button"
+                <input type="button" 
                 id="startButton"
                 value="Start JS Quizz"
-                onClick="countdown(); questionInsert(); choicesInsert();"
+                onClick="
+                countdown();
+                questionInsert();
+                choicesInsert();
+                showAnswer()"
                 style="margin-bottom: 20px;">
 
-                <h4 id="scoreBoard" style="text-align: center;">Score: <span id="score">_</span> Points</h4>
+                <h4 id="scoreBoard" style="text-align: center;"><span id="score">Score: _ Points</span></h4>
 
               <hr>
             </div>
@@ -79,7 +83,9 @@
                 </button></li>
 
               </ul>
-<!--              <p>Correct Answer is: <span id="solution"></span></p> -->
+
+              <p>Correct Answer is: <span id="solution"></span></p>
+
             </div>
           </div>
         </div> <!-- End Container -->

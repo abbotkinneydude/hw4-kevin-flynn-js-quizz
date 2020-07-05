@@ -65,32 +65,39 @@ var questions = [
 
 var timer = document.getElementById("startButton"); //.addEventListener("click", countdown());
 var scoreBoard = document.getElementById("score");
-var jsCountdown = 601;
+var jsCountdown = 600;
 var score = 0;
 var oneLiner = document.getElementById("quizzQuestions");
 var userChoice1 = document.getElementById("btn1");
 var userChoice2 = document.getElementById("btn2");
 var userChoice3 = document.getElementById("btn3");
 var userChoice4 = document.getElementById("btn4");
+var answer = document.getElementById("solution");
+
 
 function countdown() {
 var timerInterval = setInterval(function() {
       jsCountdown--;
       timer.value = jsCountdown + " seconds remaining";
-      scoreBoard.innerHTML = score;
+      scoreBoard.innerHTML = "Score: " + score + " Points";
 
     if(jsCountdown === 0) {
       clearInterval(timerInterval);
-      sendMessage();
+      gameOver();
     }
 
   }, 1000);
 }
 
-function sendMessage() {
+function gameOver() {
   timer.value = "Game Over";
-  scoreBoard.innerHTML = "Final Score" + score;  
-}
+  scoreBoard.innerHTML = "Final Score: " + score + " Points";
+  setInterval(function() { timer.value = "Play Again?"; }, 3000);
+};
+
+function gameReset() {
+// intégrer dans game over?
+};
 
 // countdown();
 
@@ -101,13 +108,18 @@ function sendMessage() {
     }
   };
 
-
 function choicesInsert() {
+    for (j = 0; j < questions.length; j++) {
+    userChoice1.innerHTML = "1: " + questions[j].choices.a;
+    userChoice2.innerHTML = "2: " + questions[j].choices.b;
+    userChoice3.innerHTML = "3: " + questions[j].choices.c;
+    userChoice4.innerHTML = "4: " + questions[j].choices.d;
+  }
+};
+
+function showAnswer() {
     for (k = 0; k < questions.length; k++) {
-    userChoice1.innerHTML = "1: " + questions[k].choices.a;
-    userChoice2.innerHTML = "2: " + questions[k].choices.b;
-    userChoice3.innerHTML = "3: " + questions[k].choices.c;
-    userChoice4.innerHTML = "4: " + questions[k].choices.d;
+    answer.innerHTML = questions[k].answer;
   }
 };
 
@@ -124,23 +136,10 @@ function comparison() {
     }
 };
 
+
 console.log(questions[0].q);
 console.log("--------------")
 console.log(questions[0].choices.a);
 console.log(questions[0].choices.b);
 console.log(questions[0].choices.c);
 console.log(questions[0].choices.d);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
