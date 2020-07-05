@@ -1,5 +1,4 @@
 
-
 var questions = [
   {q: "#01/20: JavaScript is ECMAScript?",
   choices: {a: "False", b: "True", c: "Maybe", d: "All of the above"},
@@ -65,7 +64,7 @@ var questions = [
 
 var timer = document.getElementById("startButton"); //.addEventListener("click", countdown());
 var scoreBoard = document.getElementById("score");
-var jsCountdown = 600;
+var jsCountdown = 5;
 var score = 0;
 var oneLiner = document.getElementById("quizzQuestions");
 var userChoice1 = document.getElementById("btn1");
@@ -85,24 +84,27 @@ var timerInterval = setInterval(function() {
       clearInterval(timerInterval);
       gameOver();
     }
-
   }, 1000);
 }
 
 function gameOver() {
   timer.value = "Game Over";
   scoreBoard.innerHTML = "Final Score: " + score + " Points";
-  setInterval(function() { timer.value = "Play Again?"; }, 3000);
+  setInterval(function() {
+    timer.value = "Play Again?";
+    jsCountdown = 600;
+  }, 3000);
 };
 
 function gameReset() {
-// intégrer dans game over?
+  var jsCountdown = 600;
+  var score = 0;
 };
 
 // countdown();
 
 
- function questionInsert() {
+function questionInsert() {
     for (i = 0; i < questions.length; i++) {
     oneLiner.textContent = questions[i].q;
     }
@@ -123,18 +125,30 @@ function showAnswer() {
   }
 };
 
-function comparison() {
-    if (
-      (userAnswer === true && questions[i].a === solution)// || (answer === false && questions[i].a === "non")
-      ) {
-      score = score + 10;
-      alert("Good Answer Dude! +10 Pts! Your Score: " + score + " Pts");
-    }
-    else {
-      score = score - 10;
-      alert("No luck Sucker! -10 Pts! Your Score: " + score + " Pts");
-    }
+  function comparison() {
+      if (userChoice1 === true && questions[k].answer === true || userChoice2 === true && questions[k].answer === true || userChoice3 === true && questions[k].answer === true || userChoice4 === true && questions[k].answer === true) {
+        score = score + 10;
+        alert("Good Answer Dude! +10 Pts! Your Score: " + score + " Pts");
+      }
+      else {
+        score = score - 10;
+        alert("No luck! -10 Pts! Your Score: " + score + " Pts");
+      }
+  };
+
+if (countdown() === true && questionInsert() === true && choicesInsert() === true) {
+  // function comparison() {
+  //     if (userChoice1 === true && questions[k].answer === true || userChoice2 === true && questions[k].answer === true || userChoice3 === true && questions[k].answer === true || userChoice4 === true && questions[k].answer === true) {
+  //       score = score + 10;
+  //       alert("Good Answer Dude! +10 Pts! Your Score: " + score + " Pts");
+  //     }
+  //     else {
+  //       score = score - 10;
+  //       alert("No luck! -10 Pts! Your Score: " + score + " Pts");
+  //     }
+  // };
 };
+
 
 
 console.log(questions[0].q);
@@ -143,3 +157,10 @@ console.log(questions[0].choices.a);
 console.log(questions[0].choices.b);
 console.log(questions[0].choices.c);
 console.log(questions[0].choices.d);
+
+
+
+
+
+
+
