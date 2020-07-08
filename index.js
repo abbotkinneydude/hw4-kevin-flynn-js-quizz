@@ -1,3 +1,4 @@
+// JS for Kevin Flynn (TRON) Javascript Quizz
 
 var questions = [
   {q: "#01/20: JavaScript is ECMAScript?",
@@ -62,10 +63,15 @@ var questions = [
   answer: "0"}
 ];
 
-var timer = document.getElementById("startButton"); //.addEventListener("click", countdown());
+var start = document.getElementById("startButton"); //.addEventListener("click", countdown());
+var timer = document.getElementById("time");
 var scoreBoard = document.getElementById("score");
-var jsCountdown = 5;
+var highScoreBoard = document.getElementById("highScore");
+
+var jsCountdown = 600;
 var score = 0;
+var highScore = "";
+
 var oneLiner = document.getElementById("quizzQuestions");
 var userChoice1 = document.getElementById("btn1");
 var userChoice2 = document.getElementById("btn2");
@@ -77,9 +83,9 @@ var answer = document.getElementById("solution");
 function countdown() {
 var timerInterval = setInterval(function() {
       jsCountdown--;
-      timer.value = jsCountdown + " seconds remaining";
-      scoreBoard.innerHTML = "Score: " + score + " Points";
-
+      timer.innerHTML = jsCountdown + " seconds";
+      scoreBoard.innerHTML = score + " Points";
+      highScoreBoard.innerHTML = highScore + " Points";
     if(jsCountdown === 0) {
       clearInterval(timerInterval);
       gameOver();
@@ -89,7 +95,7 @@ var timerInterval = setInterval(function() {
 
 function gameOver() {
   timer.value = "Game Over";
-  scoreBoard.innerHTML = "Final Score: " + score + " Points";
+  scoreBoard.innerHTML = score + " Points";
   setInterval(function() {
     timer.value = "Play Again?";
     jsCountdown = 600;
@@ -103,12 +109,11 @@ function gameReset() {
 
 // countdown();
 
-
 function questionInsert() {
     for (i = 0; i < questions.length; i++) {
-    oneLiner.textContent = questions[i].q;
-    }
-  };
+    oneLiner.innerHTML = questions[i].q;
+  }
+};
 
 function choicesInsert() {
     for (j = 0; j < questions.length; j++) {
@@ -125,42 +130,35 @@ function showAnswer() {
   }
 };
 
-  function comparison() {
-      if (userChoice1 === true && questions[k].answer === true || userChoice2 === true && questions[k].answer === true || userChoice3 === true && questions[k].answer === true || userChoice4 === true && questions[k].answer === true) {
-        score = score + 10;
-        alert("Good Answer Dude! +10 Pts! Your Score: " + score + " Pts");
-      }
-      else {
-        score = score - 10;
-        alert("No luck! -10 Pts! Your Score: " + score + " Pts");
-      }
-  };
 
-if (countdown() === true && questionInsert() === true && choicesInsert() === true) {
-  // function comparison() {
-  //     if (userChoice1 === true && questions[k].answer === true || userChoice2 === true && questions[k].answer === true || userChoice3 === true && questions[k].answer === true || userChoice4 === true && questions[k].answer === true) {
-  //       score = score + 10;
-  //       alert("Good Answer Dude! +10 Pts! Your Score: " + score + " Pts");
-  //     }
-  //     else {
-  //       score = score - 10;
-  //       alert("No luck! -10 Pts! Your Score: " + score + " Pts");
-  //     }
-  // };
+// function questionnaire() {
+//     for (a = 0; a < questions.length; a++) {
+//   }
+// };
+
+// .addEventListener("click", comparison())
+
+function comparison() {
+    for (var l = 0; l < questions.length; l++) {
+    // var solution = confirm(questions[i].q);
+
+    if ((userChoice1 === true && questions[k].answer === true) || (userChoice2 === true && questions[k].answer === true) || (userChoice3 === true && questions[k].answer === true) || (userChoice4 === true && questions[k].answer === true)) {
+        score = score + 10;
+      console.log("Good Answer Dude! +10 Pts! Your Score: " + score + " Pts");
+    }
+    else {
+      score = score - 10; jsCountdown -10;
+      console.log("No luck! -10 Pts! Your Score: " + score + " Pts");
+    }
+  }
 };
 
-
-
 console.log(questions[0].q);
-console.log("--------------")
+console.log("--------------");
 console.log(questions[0].choices.a);
 console.log(questions[0].choices.b);
 console.log(questions[0].choices.c);
 console.log(questions[0].choices.d);
-
-
-
-
-
-
-
+console.log("--------------");
+console.log(questions[0].answer);
+console.log("--------------");
