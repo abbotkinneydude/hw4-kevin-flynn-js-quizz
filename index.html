@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="./assets/css/style.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" defer></script>
   <script src="./index.js" defer></script>
   </head>
 <body>
@@ -36,17 +35,15 @@
           </div>
           <!-- Start Button -->
           <div class="row">
-            <div class="col md-12" style="text-align: center;">
-                <input id="startButton" type="button" value="Start JS Quizz"
-                onclick="countdown(); questionInsert(); choicesInsert(); showAnswer();"
-                style="margin-bottom: 20px;">
+            <div id="startButtonRow" class="col md-12" style="text-align: center;">
+                <input id="startButton" type="button" value="Start JS Quizz" style="margin-bottom: 20px;">
             </div>
           </div>
           <!-- End Start Button -->          
           <!-- Time / Score -->
-          <div class="row">
+          <div id="parameters" class="row">
             <div class="col md-4" style="text-align: center;">
-                <h5>Time Left:<br /><span id="time"></span></h5>
+                <h5>Time Left:<br /><span id="timer"></span></h5>
             </div>
             <div class="col md-4" style="text-align: center;">
                 <h5>Score:<br /><span id="score"></span></h5>
@@ -62,7 +59,7 @@
             <div class="col md-12" id="quizzQuestions">[Question Section]</div>       
           </div>
           <!-- Choices Row -->
-          <div class="row" style="margin: 0 auto; margin-bottom: 20px;">
+          <div id="userChoices" class="row" style="margin: 0 auto; margin-bottom: 20px;">
             <div class="col md-12">            
               <ul>
                 <li><button id="btn1" class="btn btn-danger btn-choice"><h5><span>1:</span></h5></button></li>
@@ -70,7 +67,7 @@
                 <li><button id="btn3" class="btn btn-danger btn-choice"><h5><span>3:</span></h5></button></li>
                 <li><button id="btn4" class="btn btn-danger btn-choice"><h5><span>4:</span></h5></button></li>
               </ul>
-              <p>Correct Answer is: <span id="solution"></span></p>
+              <p><span id="solution"></span></p>
             </div>
           </div>
         </div> <!-- End Container -->

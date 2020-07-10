@@ -5,8 +5,8 @@ var questions = [
   choices: {a: "False", b: "True", c: "Maybe", d: "All of the above"},
   answer: "True"},
   {q: "#02/20: JavaScript written under which of the following tag?",
-  choices: {a: "<JavaScript></JavaScript>", b: "<script>/script>", c: "<code></code>", d: "<head></head>"},
-  answer: "<script>/script>"},
+  choices: {a: "<JavaScript></JavaScript>", b: "<script></script>", c: "<code></code>", d: "<head></head>"},
+  answer: "<script></script>"},
   {q: "#03/20: Variable in JavaScript declared with which of the following keyword?",
   choices: {a: "new", b: "int", c: "string", d: "var"},
   answer: "var"},
@@ -63,12 +63,13 @@ var questions = [
   answer: "0"}
 ];
 
-var start = document.getElementById("startButton"); //.addEventListener("click", countdown());
-var timer = document.getElementById("time");
+var start = document.getElementById("startButton");
+var jsCountdown = 600;
+var time = document.getElementById("timer");
+var timeStart= false;
 var scoreBoard = document.getElementById("score");
 var highScoreBoard = document.getElementById("highScore");
 
-var jsCountdown = 600;
 var score = 0;
 var highScore = "";
 
@@ -79,26 +80,112 @@ var userChoice3 = document.getElementById("btn3");
 var userChoice4 = document.getElementById("btn4");
 var answer = document.getElementById("solution");
 
+    //  Deleted var, might bring it back later ->  var timeRemaining = true;
+    //  Deleted var, might bring it back later  ->  var output="";
 
-function countdown() {
-var timerInterval = setInterval(function() {
+let index = 0;
+// Unified index start point for oneLiner / userChoice1-4 / answer
+
+start.addEventListener("click", function() {
+  score = 0;
+  timeStart = true; //C
+  startButton.style.display = "none";
+  countDownScoreHighScore();
+});
+
+function countDownScoreHighScore() {
+  var timerInterval = setInterval(function() {
+    if (timeStart) //C
       jsCountdown--;
-      timer.innerHTML = jsCountdown + " seconds";
+      time.innerHTML = jsCountdown + " seconds";
       scoreBoard.innerHTML = score + " Points";
       highScoreBoard.innerHTML = highScore + " Points";
-    if(jsCountdown === 0) {
+      questionInsert();
+
+    if (jsCountdown === 0)
+      {
+      timeStart = false;
       clearInterval(timerInterval);
       gameOver();
     }
-  }, 1000);
-}
+  }, 1000)
+};
+
+function questionInsert() {
+    oneLiner.innerHTML = questions[index].q;
+    choicesInsert();
+};
+
+function choicesInsert() {
+    userChoice1.innerHTML = "1: " + questions[index].choices.a;
+    userChoice1.addEventListener('click', function(event) {event.stopPropagation(); comparison()}); 
+    userChoice2.innerHTML = "2: " + questions[index].choices.b;
+    userChoice2.addEventListener('click', function(event) {event.stopPropagation(); comparison()});
+    userChoice3.innerHTML = "3: " + questions[index].choices.c;
+    userChoice3.addEventListener('click', function(event) {event.stopPropagation(); comparison()});
+    userChoice4.innerHTML = "4: " + questions[index].choices.d;
+    userChoice4.addEventListener('click', function(event) {event.stopPropagation(); comparison()});
+    showAnswer();
+};
+
+function showAnswer() {
+    answer.innerHTML = questions[index].answer;
+};
+
+function comparison() {
+
+  userChoice1Answer = questions[index].choices.a.toLowerCase();
+  userChoice2Answer = questions[index].choices.b.toLowerCase();
+  userChoice3Answer = questions[index].choices.c.toLowerCase();
+  userChoice4Answer = questions[index].choices.d.toLowerCase();
+  correctAnswer = questions[index].answer.toLowerCase();
+
+console.log(questions[index].q)
+console.log("--------------");        
+console.log(userChoice1Answer);
+console.log(userChoice2Answer);
+console.log(userChoice3Answer);
+console.log(userChoice4Answer);
+console.log("--------------");
+console.log(correctAnswer);
+console.log("--------------");
+
+
+    if ( (userChoice1Answer === correctAnswer && correctAnswer === userChoice1Answer) || (userChoice2Answer === correctAnswer && correctAnswer === userChoice2Answer) || (userChoice3Answer === correctAnswer && correctAnswer === userChoice3Answer) || (userChoice4Answer === correctAnswer && correctAnswer === userChoice4Answer) )
+      {
+        score = score + 10;
+        answer.innerHTML = "Good Answer Dude! +10 Pts! Your Score: " + score + " Pts | Correct Answer: " + correctAnswer;
+       setInterval(function() {
+        },
+        10000);
+      }
+        
+    else
+      {
+      score = score - 10;
+      jsCountdown = jsCountdown - 10;
+        answer.innerHTML = "Sorry. Wrong Answer. Your Score: " + score + " Pts" + " Your Remaining Time: " + jsCountdown + " seconds | Correct Answer is: " + correctAnswer;
+      setInterval(function() {
+        },
+        10000);
+      }
+
+    if (index >= questions.length -1) {gameOver();}
+    else {index++; questionInsert();}
+
+};
+
+// )};
+
 
 function gameOver() {
   timer.value = "Game Over";
   scoreBoard.innerHTML = score + " Points";
   setInterval(function() {
-    timer.value = "Play Again?";
+    startButton.style.display = "block";
+    startButton.innerHTML = "Play Again?";
     jsCountdown = 600;
+       timeStart = false; //C
   }, 3000);
 };
 
@@ -106,59 +193,3 @@ function gameReset() {
   var jsCountdown = 600;
   var score = 0;
 };
-
-// countdown();
-
-function questionInsert() {
-    for (i = 0; i < questions.length; i++) {
-    oneLiner.innerHTML = questions[i].q;
-  }
-};
-
-function choicesInsert() {
-    for (j = 0; j < questions.length; j++) {
-    userChoice1.innerHTML = "1: " + questions[j].choices.a;
-    userChoice2.innerHTML = "2: " + questions[j].choices.b;
-    userChoice3.innerHTML = "3: " + questions[j].choices.c;
-    userChoice4.innerHTML = "4: " + questions[j].choices.d;
-  }
-};
-
-function showAnswer() {
-    for (k = 0; k < questions.length; k++) {
-    answer.innerHTML = questions[k].answer;
-  }
-};
-
-
-// function questionnaire() {
-//     for (a = 0; a < questions.length; a++) {
-//   }
-// };
-
-// .addEventListener("click", comparison())
-
-function comparison() {
-    for (var l = 0; l < questions.length; l++) {
-    // var solution = confirm(questions[i].q);
-
-    if ((userChoice1 === true && questions[k].answer === true) || (userChoice2 === true && questions[k].answer === true) || (userChoice3 === true && questions[k].answer === true) || (userChoice4 === true && questions[k].answer === true)) {
-        score = score + 10;
-      console.log("Good Answer Dude! +10 Pts! Your Score: " + score + " Pts");
-    }
-    else {
-      score = score - 10; jsCountdown -10;
-      console.log("No luck! -10 Pts! Your Score: " + score + " Pts");
-    }
-  }
-};
-
-console.log(questions[0].q);
-console.log("--------------");
-console.log(questions[0].choices.a);
-console.log(questions[0].choices.b);
-console.log(questions[0].choices.c);
-console.log(questions[0].choices.d);
-console.log("--------------");
-console.log(questions[0].answer);
-console.log("--------------");
