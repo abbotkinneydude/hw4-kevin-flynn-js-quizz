@@ -13,7 +13,7 @@ Timed quiz on JavaScript fundamentals
 
 • Stores high scores
 
-**2020-07-04 Status**
+**2020-07-09 Status**
 
 (07/04) All JQuery deleted, plain JS only.
 Steps #1, #2, #3 functional.
@@ -24,15 +24,15 @@ Steps #1, #2, #3 functional.
 
 (DONE) •3 Presented with question / choices
 
-4 Answer question
+(DONE) 4 Answer question
 
-5 Presented with another question
+(DONE) 5 Presented with another question
 
-6 Answer question incorrectly
+(DONE) 6 Answer question incorrectly
 
-7 Time subtracted from the clock
+(DONE) 7 Time subtracted from the clock
 
-8 All questions answered or timer reaches 0: Game Over
+(DONE) 8 All questions answered or timer reaches 0: Game Over
 
 9 Save my initials and score
 
