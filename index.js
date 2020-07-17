@@ -117,15 +117,21 @@ function questionInsert() {
 };
 
 function choicesInsert() {
+
     userChoice1.innerHTML = "1: " + questions[index].choices.a;
     userChoice1.addEventListener('click', function(event) {event.stopPropagation(); comparison()}); 
+    console.log(score);
     userChoice2.innerHTML = "2: " + questions[index].choices.b;
     userChoice2.addEventListener('click', function(event) {event.stopPropagation(); comparison()});
+    console.log(score);
     userChoice3.innerHTML = "3: " + questions[index].choices.c;
     userChoice3.addEventListener('click', function(event) {event.stopPropagation(); comparison()});
+    console.log(score);
     userChoice4.innerHTML = "4: " + questions[index].choices.d;
     userChoice4.addEventListener('click', function(event) {event.stopPropagation(); comparison()});
+    console.log(score);
     showAnswer();
+    
 };
 
 function showAnswer() {
@@ -152,30 +158,30 @@ console.log("--------------");
 
 
     if ( (userChoice1Answer === correctAnswer && correctAnswer === userChoice1Answer) || (userChoice2Answer === correctAnswer && correctAnswer === userChoice2Answer) || (userChoice3Answer === correctAnswer && correctAnswer === userChoice3Answer) || (userChoice4Answer === correctAnswer && correctAnswer === userChoice4Answer) )
+
       {
-        score = score + 10;
+        score = score + 1;
         answer.innerHTML = "Good Answer Dude! +10 Pts! Your Score: " + score + " Pts | Correct Answer: " + correctAnswer;
-       setInterval(function() {
-        },
-        10000);
+        console.log(score)
       }
         
     else
       {
-      score = score - 10;
+      score = score - 1;
       jsCountdown = jsCountdown - 10;
         answer.innerHTML = "Sorry. Wrong Answer. Your Score: " + score + " Pts" + " Your Remaining Time: " + jsCountdown + " seconds | Correct Answer is: " + correctAnswer;
-      setInterval(function() {
-        },
-        10000);
       }
+      
 
-    if (index >= questions.length -1) {gameOver();}
-    else {index++; questionInsert();}
-
+    if(index >= questions.length -1) {
+      gameOver();
+    }
+    else {
+      index++;
+      questionInsert();
+    }
+    
 };
-
-// )};
 
 
 function gameOver() {
@@ -193,3 +199,5 @@ function gameReset() {
   var jsCountdown = 600;
   var score = 0;
 };
+
+
