@@ -80,22 +80,22 @@ var userChoice3 = document.getElementById("btn3");
 var userChoice4 = document.getElementById("btn4");
 var answer = document.getElementById("solution");
 
-    //  Deleted var, might bring it back later ->  var timeRemaining = true;
-    //  Deleted var, might bring it back later  ->  var output="";
+    //  Deleted var, might bring it back later ->  var timeOngoing = true;
+    //  Deleted var, might bring it back later  ->  var output=""; --> this is for upcoming high score / initials capture
 
 let index = 0;
 // Unified index start point for oneLiner / userChoice1-4 / answer
 
 start.addEventListener("click", function() {
   score = 0;
-  timeStart = true; //C
+  timeStart = true;
   startButton.style.display = "none";
   countDownScoreHighScore();
 });
 
 function countDownScoreHighScore() {
   var timerInterval = setInterval(function() {
-    if (timeStart) //C
+    if (timeStart)
       jsCountdown--;
       time.innerHTML = jsCountdown + " seconds";
       scoreBoard.innerHTML = score + " Points";
@@ -191,7 +191,7 @@ function gameOver() {
     startButton.style.display = "block";
     startButton.innerHTML = "Play Again?";
     jsCountdown = 600;
-       timeStart = false; //C
+       timeStart = false;
   }, 3000);
 };
 
