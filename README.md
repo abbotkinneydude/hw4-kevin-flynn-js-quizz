@@ -13,6 +13,10 @@ Timed quiz on JavaScript fundamentals
 
 • Stores high scores
 
+**2020-07-17 Status**
+
+I took back the score to 1 point per question (instead of 10) and placed many console.logs in the code: 1) to listen to the score occurences, 2) to make sure the question/choices/answer are listed properly as the score gets updated. This still needs debugging as the quizz still jumps too many questions (but does assign the valid score). Debugging is ongoing.
+
 **2020-07-04 Status**
 
 (07/04) All JQuery deleted, plain JS only.
