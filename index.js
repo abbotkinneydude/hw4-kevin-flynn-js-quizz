@@ -89,8 +89,10 @@ let index = 0;
 start.addEventListener("click", function() {
   score = 0;
   timeStart = true;
-  startButton.style.display = "none";
+  // startButton.style.display = "none"; ******You were referring to the element id rather than the start variable.
+  start.style.display = "none"
   countDownScoreHighScore();
+  questionInsert(); // <------See line 105 to understand why I moved it up here
 });
 
 function countDownScoreHighScore() {
@@ -100,7 +102,8 @@ function countDownScoreHighScore() {
       time.innerHTML = jsCountdown + " seconds";
       scoreBoard.innerHTML = score + " Points";
       highScoreBoard.innerHTML = highScore + " Points";
-      questionInsert();
+      // questionInsert();          //<---------You were calling this questionIsert every second. I moved it to the start click function so it calls it once, then your
+                                    // script will keep calling it.
 
     if (jsCountdown === 0)
       {
@@ -116,19 +119,18 @@ function questionInsert() {
     choicesInsert();
 };
 
+let counter = 0;
 function choicesInsert() {
 
-    userChoice1.innerHTML = "1: " + questions[index].choices.a;
-    userChoice1.addEventListener('click', function(event) {event.stopPropagation(); comparison()}); 
+    //Changed to innerText. 
+
+    userChoice1.innerText = questions[index].choices.a; //I removed the numbering and put it in the index.html so that we can access the answer directly
     console.log(score);
-    userChoice2.innerHTML = "2: " + questions[index].choices.b;
-    userChoice2.addEventListener('click', function(event) {event.stopPropagation(); comparison()});
+    userChoice2.innerText =questions[index].choices.b; //I removed the numbering and put it in the index.html so that we can access the answer directly
     console.log(score);
-    userChoice3.innerHTML = "3: " + questions[index].choices.c;
-    userChoice3.addEventListener('click', function(event) {event.stopPropagation(); comparison()});
+    userChoice3.innerText =  questions[index].choices.c; //I removed the numbering and put it in the index.html so that we can access the answer directly
     console.log(score);
-    userChoice4.innerHTML = "4: " + questions[index].choices.d;
-    userChoice4.addEventListener('click', function(event) {event.stopPropagation(); comparison()});
+    userChoice4.innerText = questions[index].choices.d; //I removed the numbering and put it in the index.html so that we can access the answer directly
     console.log(score);
     showAnswer();
     
@@ -138,33 +140,33 @@ function showAnswer() {
     answer.innerHTML = questions[index].answer;
 };
 
-function comparison() {
-
-  userChoice1Answer = questions[index].choices.a.toLowerCase();
-  userChoice2Answer = questions[index].choices.b.toLowerCase();
-  userChoice3Answer = questions[index].choices.c.toLowerCase();
-  userChoice4Answer = questions[index].choices.d.toLowerCase();
+function comparison(event) {
+  userChoiceAnswer = event.target.innerText;  
   correctAnswer = questions[index].answer.toLowerCase();
+  // userChoice1Answer = questions[index].choices.a.toLowerCase();
+  // userChoice2Answer = questions[index].choices.b.toLowerCase();
+  // userChoice3Answer = questions[index].choices.c.toLowerCase();
+  // userChoice4Answer = questions[index].choices.d.toLowerCase();
+  
 
-console.log(questions[index].q)
-console.log("--------------");        
-console.log(userChoice1Answer);
-console.log(userChoice2Answer);
-console.log(userChoice3Answer);
-console.log(userChoice4Answer);
-console.log("--------------");
-console.log(correctAnswer);
-console.log("--------------");
+// console.log(questions[index].q)
+// console.log("--------------");        
+// console.log(userChoice1Answer);
+// console.log(userChoice2Answer);
+// console.log(userChoice3Answer);
+// console.log(userChoice4Answer);
+// console.log("--------------");
+// console.log(correctAnswer);
+// console.log("--------------");
 
 
-    if ( (userChoice1Answer === correctAnswer && correctAnswer === userChoice1Answer) || (userChoice2Answer === correctAnswer && correctAnswer === userChoice2Answer) || (userChoice3Answer === correctAnswer && correctAnswer === userChoice3Answer) || (userChoice4Answer === correctAnswer && correctAnswer === userChoice4Answer) )
-
+    // if ( (userChoice1Answer === correctAnswer && correctAnswer === userChoice1Answer) || (userChoice2Answer === correctAnswer && correctAnswer === userChoice2Answer) || (userChoice3Answer === correctAnswer && correctAnswer === userChoice3Answer) || (userChoice4Answer === correctAnswer && correctAnswer === userChoice4Answer) )
+    if (userChoiceAnswer === correctAnswer)
       {
         score = score + 1;
         answer.innerHTML = "Good Answer Dude! +10 Pts! Your Score: " + score + " Pts | Correct Answer: " + correctAnswer;
         console.log(score)
-      }
-        
+      }    
     else
       {
       score = score - 1;
@@ -178,7 +180,7 @@ console.log("--------------");
     }
     else {
       index++;
-      questionInsert();
+      questionInsert(); 
     }
     
 };
@@ -188,8 +190,10 @@ function gameOver() {
   timer.value = "Game Over";
   scoreBoard.innerHTML = score + " Points";
   setInterval(function() {
-    startButton.style.display = "block";
-    startButton.innerHTML = "Play Again?";
+    // startButton.style.display = "block"; ******You were referring to the element id rather than the start variable.
+    // startButton.innerHTML = "Play Again?"; ******You were referring to the element id rather than the start variable.
+    start.style.display = "block";
+    start.innerHTML = "Play Again?";
     jsCountdown = 600;
        timeStart = false;
   }, 3000);
@@ -200,4 +204,8 @@ function gameReset() {
   var score = 0;
 };
 
-
+//Took out the functions from the function because they kept on recreating the event listeners
+userChoice1.addEventListener('click', function(event) {event.stopPropagation(); comparison(event)});
+userChoice2.addEventListener('click', function(event) {event.stopPropagation(); comparison(event)});
+userChoice3.addEventListener('click', function(event) {event.stopPropagation(); comparison(event)});
+userChoice4.addEventListener('click', function(event) {event.stopPropagation(); comparison(event)});
