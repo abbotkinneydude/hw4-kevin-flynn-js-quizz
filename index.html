@@ -19,7 +19,7 @@
         <div class="container"> <!-- Start Container -->
           <!-- Start Kevin Flynn Row -->
           <div class="row">
-            <div class="col md-12"><img src="assets/img/jeff_bridges_the_dude_tron_legacy.jpg" title="Let's Split Man!" alt="Jeff Bridges as Kevin Flynn in TRON LEGACY" id="kevinFlynn" /></div>
+            <div class="col md-12"><img src="assets/img/jeff_bridges_the_dude_tron_legacy.jpg" title="Let's Split Man!" alt="Jeff Bridges as Kevin Flynn in TRON LEGACY" id="kevinFlynn" style="display: none;" /></div>
             </div>
           </div>
           <!-- Rules Row -->
@@ -35,20 +35,20 @@
           </div>
           <!-- Start Button -->
           <div class="row">
-            <div id="startButtonRow" class="col md-12" style="text-align: center;">
-                <input id="startButton" type="button" value="Start JS Quizz" style="margin-bottom: 20px;">
+            <div id="startButtonRow" class="col md-12">
+                <input id="startButton" type="button" value="Start JS Quizz">
             </div>
           </div>
           <!-- End Start Button -->          
           <!-- Time / Score -->
           <div id="parameters" class="row">
-            <div class="col md-4" style="text-align: center;">
+            <div class="col md-4">
                 <h5>Time Left:<br /><span id="timer"></span></h5>
             </div>
-            <div class="col md-4" style="text-align: center;">
+            <div class="col md-4">
                 <h5>Score:<br /><span id="score"></span></h5>
             </div>
-            <div class="col md-4" style="text-align: center;">
+            <div class="col md-4">
                 <h5>High Score:<br /><span id="highScore"></span></h5>
             </div>
           </div>
@@ -61,13 +61,22 @@
           <!-- Choices Row -->
           <div id="userChoices" class="row" style="margin: 0 auto; margin-bottom: 20px;">
             <div class="col md-12">            
-              <ul>
-                <li><button id="btn1" class="btn btn-danger btn-choice"><h5><span>1:</span></h5></button></li>
-                <li><button id="btn2" class="btn btn-danger btn-choice"><h5><span>2:</span></h5></button></li>
-                <li><button id="btn3" class="btn btn-danger btn-choice"><h5><span>3:</span></h5></button></li>
-                <li><button id="btn4" class="btn btn-danger btn-choice"><h5><span>4:</span></h5></button></li>
-              </ul>
-              <p><span id="solution"></span></p>
+              <ol start= "1">
+                <li class="question"><button id="btn1" class="btn btn-danger btn-choice"></button></li>
+                <li class="question"><button id="btn2" class="btn btn-danger btn-choice"></button></li>
+                <li class="question"><button id="btn3" class="btn btn-danger btn-choice"></button></li>
+                <li class="question"><button id="btn4" class="btn btn-danger btn-choice"></button></li>
+              </ol>
+              <hr class="separator" />
+              <span>&nbsp;</span>
+              <p id="solution"></p>
+              <span>&nbsp;</span>
+              <br />
+              <span>&nbsp;</span>
+              <br />
+              <span>&nbsp;</span>
+              <br />
+              <span>&nbsp;</span>
             </div>
           </div>
         </div> <!-- End Container -->

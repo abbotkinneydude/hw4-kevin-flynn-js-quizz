@@ -1,4 +1,6 @@
-// JS for Kevin Flynn (TRON) Javascript Quizz
+/* JS for Kevin Flynn (TRON) Javascript Quizz */
+
+/* Questions Array [20] */
 
 var questions = [
   {q: "#01/20: JavaScript is ECMAScript?",
@@ -14,10 +16,10 @@ var questions = [
   choices: {a: "String", b: "Number", c: "Boolean", d: "All of the above"},
   answer: "All of the above"},
   {q: "#05/20: Which of the following is NOT a JavaScript object?",
-  choices: {a: "var obj = {};", b: "var obj = { name: &#34;Steve&#34;};", c: "var obj = { name = &#34;Steve&#34;};", d: "var obj = new Object();"},
-  answer: "var obj = { name = &#34;Steve&#34;};"},
+  choices: {a: "var obj = {};", b: "var obj = { name: ”Steve”};", c: "var obj = { name = ”Steve”};", d: "var obj = new Object();"},
+  answer: "var obj = { name = ”Steve”};"},
   {q: "#06/20: Which of the following is NOT a correct way of declaring an array in JavaScript?",
-  choices: {a: "var arr = [1, &#34;two&#34;, 3 , 4 ];", b: "var arr = new Array();", c: "var[] arr = new Number()[5];", d: "None of the above"},
+  choices: {a: "var arr = [1, ”two”, 3 , 4 ];", b: "var arr = new Array();", c: "var[] arr = new Number()[5];", d: "None of the above"},
   answer: "var[] arr = new Number()[5];"},
   {q: "#07/20: What is null in JavaScript?",
   choices: {a: "Null means empty string value.", b: "Null means absence of a value.", c: "Null means unknown value.", d: "Null means zero value."},
@@ -34,7 +36,7 @@ var questions = [
   {q: "#11/20: Which of the following is an example of anonymous function in JavaScript?",
   choices: {a: "var myFunc = function(){ };", b: "function(){ };", c: "var myFunc = (){ };", d: "All of the above."},
   answer: "var myFunc = function(){ };"},
-  {q: "#12/20: What will 1 == &#34;1&#34; return?",
+  {q: "#12/20: What will 1 == ”1” return?",
   choices: {a: "True", b: "False", c: "0", d: "1"},
   answer: "True"},
   {q: "#13/20: What is eval() in JavaScript?",
@@ -63,34 +65,44 @@ var questions = [
   answer: "0"}
 ];
 
+/* Variable Declarations*/ 
+
+/* var = 'Get Document by ID' section / Screen Elements Acquisition */
+
 var start = document.getElementById("startButton");
-var jsCountdown = 600;
 var time = document.getElementById("timer");
-var timeStart= false;
 var scoreBoard = document.getElementById("score");
 var highScoreBoard = document.getElementById("highScore");
-
-var score = 0;
-var highScore = "";
-
 var oneLiner = document.getElementById("quizzQuestions");
 var userChoice1 = document.getElementById("btn1");
 var userChoice2 = document.getElementById("btn2");
 var userChoice3 = document.getElementById("btn3");
 var userChoice4 = document.getElementById("btn4");
-var answer = document.getElementById("solution");
+var answer = document.getElementById("solution"); /* In Testing mode, this allows the answer to show at the bottom.
+During a regular game, it's used to display a response message to the player after he makes a choice. */
 
-    //  Deleted var, might bring it back later ->  var timeOngoing = true;
+/* Simple Variables for Remaining Game Functions */
+
+var timeStart = false; /* This is to prevent the timer to start during page load */
+var timeMotion = true; /* This applies while the timer is in motion. When timer reacher O, timeMotion = false */
+var jsCountdown = 10; /* 10 minutes = 600 seconds */
+var score = 0; /* Start with a zero score.*/
+var highScore = 0;  /* First game starts with a zero high score.*/
+var highScores = "[]"; /* High Score storage -> Use of an array because we need to store more than a single high score */
+
     //  Deleted var, might bring it back later  ->  var output=""; --> this is for upcoming high score / initials capture
 
 let index = 0;
-// Unified index start point for oneLiner / userChoice1-4 / answer
+/* Unified index start point for oneLiner / userChoice1-4 / answer.
+This is extremely important as it allows every function below using the index to run in sync (one after another).*/
 
 start.addEventListener("click", function() {
-  score = 0;
+  score = 0;  /* This also allows the score to go to zero after each game is over. */
+  jsCountdown = 10; /* This is to reset the allowed time to 10 minutes */
   timeStart = true;
-  startButton.style.display = "none";
-  countDownScoreHighScore();
+  start.style.display = "none";
+  countDownScoreHighScore(); /* Sends to function below lines 106-121 */
+  questionInsert(); /* Sends to function below lines 123-126 */
 });
 
 function countDownScoreHighScore() {
@@ -100,11 +112,11 @@ function countDownScoreHighScore() {
       time.innerHTML = jsCountdown + " seconds";
       scoreBoard.innerHTML = score + " Points";
       highScoreBoard.innerHTML = highScore + " Points";
-      questionInsert();
 
     if (jsCountdown === 0)
       {
       timeStart = false;
+      timeMotion = false;
       clearInterval(timerInterval);
       gameOver();
     }
@@ -116,88 +128,70 @@ function questionInsert() {
     choicesInsert();
 };
 
+
 function choicesInsert() {
-
-    userChoice1.innerHTML = "1: " + questions[index].choices.a;
-    userChoice1.addEventListener('click', function(event) {event.stopPropagation(); comparison()}); 
+    userChoice1.innerText = questions[index].choices.a;
+    userChoice2.innerText = questions[index].choices.b;
+    userChoice3.innerText = questions[index].choices.c;
+    userChoice4.innerText = questions[index].choices.d;
     console.log(score);
-    userChoice2.innerHTML = "2: " + questions[index].choices.b;
-    userChoice2.addEventListener('click', function(event) {event.stopPropagation(); comparison()});
-    console.log(score);
-    userChoice3.innerHTML = "3: " + questions[index].choices.c;
-    userChoice3.addEventListener('click', function(event) {event.stopPropagation(); comparison()});
-    console.log(score);
-    userChoice4.innerHTML = "4: " + questions[index].choices.d;
-    userChoice4.addEventListener('click', function(event) {event.stopPropagation(); comparison()});
-    console.log(score);
-    showAnswer();
-    
+    /* showAnswer();
+    Uncomment if you want to see the correct answer to show below the questions during the game */
 };
 
-function showAnswer() {
-    answer.innerHTML = questions[index].answer;
-};
+userChoice1.addEventListener('click', function(event) {event.stopPropagation(); comparison(event)});
+userChoice2.addEventListener('click', function(event) {event.stopPropagation(); comparison(event)});
+userChoice3.addEventListener('click', function(event) {event.stopPropagation(); comparison(event)});
+userChoice4.addEventListener('click', function(event) {event.stopPropagation(); comparison(event)});
 
-function comparison() {
+/* function showAnswer() {
+  answer.innerText = questions[index].answer;
+}; */
 
-  userChoice1Answer = questions[index].choices.a.toLowerCase();
-  userChoice2Answer = questions[index].choices.b.toLowerCase();
-  userChoice3Answer = questions[index].choices.c.toLowerCase();
-  userChoice4Answer = questions[index].choices.d.toLowerCase();
-  correctAnswer = questions[index].answer.toLowerCase();
+/* Uncomment the function above if you want the answer to show below the questions during the game*/ 
 
-console.log(questions[index].q)
-console.log("--------------");        
-console.log(userChoice1Answer);
-console.log(userChoice2Answer);
-console.log(userChoice3Answer);
-console.log(userChoice4Answer);
-console.log("--------------");
-console.log(correctAnswer);
-console.log("--------------");
+function comparison(event) {
+  console.log(answer);
+  userChoiceAnswer = event.target.innerText;  
+  correctAnswer = questions[index].answer; /* Please note the NON use of a .toLowerCase() as it would derail the comparison function */
 
-
-    if ( (userChoice1Answer === correctAnswer && correctAnswer === userChoice1Answer) || (userChoice2Answer === correctAnswer && correctAnswer === userChoice2Answer) || (userChoice3Answer === correctAnswer && correctAnswer === userChoice3Answer) || (userChoice4Answer === correctAnswer && correctAnswer === userChoice4Answer) )
-
+    if (userChoiceAnswer === correctAnswer)
       {
-        score = score + 1;
-        answer.innerHTML = "Good Answer Dude! +10 Pts! Your Score: " + score + " Pts | Correct Answer: " + correctAnswer;
-        console.log(score)
-      }
-        
+        score = score + 10; /* I could have done score++ but I wanted score = score + 10 like in my early ATARI BASIC days */
+        answer.innerText = "Good Answer Dude! +10 Pts! Your Score: " + score + " Pts \nCorrect Answer was: " + correctAnswer;
+        setTimeout(function() {answer.innerText = "";}, 3000); /* This is to erase the response text after 5 seconds */
+      }    
+
     else
       {
-      score = score - 1;
+      score = score - 10;
       jsCountdown = jsCountdown - 10;
-        answer.innerHTML = "Sorry. Wrong Answer. Your Score: " + score + " Pts" + " Your Remaining Time: " + jsCountdown + " seconds | Correct Answer is: " + correctAnswer;
+        answer.innerText = "Sorry. Wrong Answer. Your Score: " + score + " Pts. Remaining Time: " + jsCountdown + " seconds \nCorrect Answer was: " + correctAnswer;
+       setTimeout(function() {answer.innerText = "";}, 3000);
       }
-      
 
     if(index >= questions.length -1) {
       gameOver();
     }
+    else if (timer = 0) {
+      gameOver();
+    }
     else {
       index++;
-      questionInsert();
+      questionInsert(); 
     }
-    
-};
 
+};
 
 function gameOver() {
   timer.value = "Game Over";
-  scoreBoard.innerHTML = score + " Points";
-  setInterval(function() {
-    startButton.style.display = "block";
-    startButton.innerHTML = "Play Again?";
-    jsCountdown = 600;
-       timeStart = false;
-  }, 3000);
+  scoreBoard.innerText = score + " Points";
+  start.style.display = table;
+  start.innerText = "Play Again?";
+  timeStart = false;
 };
 
 function gameReset() {
   var jsCountdown = 600;
   var score = 0;
 };
-
-

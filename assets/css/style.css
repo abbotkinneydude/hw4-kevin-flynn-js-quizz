@@ -53,6 +53,7 @@ header {
   text-align: center;
 }
 
+
 .card {
   background-color: hsl(0, 0%, 100%);
   border-radius: 5px;
@@ -95,6 +96,29 @@ header {
   clear: both;
 }
 
+/* Start Button Timer Score High Score Section */
+
+#startButtonRow {
+  text-align: center;
+}
+
+#startButton {
+  margin-bottom: 20px;
+}
+
+#parameters {
+  text-align: center;
+}
+
+/* Question Section */
+
+li.question {
+  margin-left: 20px;
+  font-size: 22px;
+  line-height: 22px;
+  padding-top: 14px;
+}
+
 .btn {
   border: none;
   background-color: hsl(360, 91%, 36%);
@@ -107,8 +131,17 @@ header {
   line-height: 22px;
   margin: 16px 16px 16px 20px;
   padding: 14px 34px;
-  text-align: center;
+  text-align: left;
   cursor: pointer;
+}
+
+hr.separator {
+  width: 75%;
+  border: 1px dotted #c0c0c0;
+}
+
+p.solution {
+  height: 180px;
 }
 
 button[disabled] {
