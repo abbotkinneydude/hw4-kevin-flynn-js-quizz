@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>The 600 Seconds Javascript Quizz (&copy; Kevin Flynn)</title>
+  <title>The 300 Seconds Kevin Flynn Javascript Quizz (Let's Split Man!)</title>
   <link rel="stylesheet" href="./assets/css/reset.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -13,64 +13,74 @@
   </head>
 <body>
   <div class="wrapper">
-    <header><h1>The 600 Seconds Javascript Quizz</h1></header>
+    <header><h2>The 300 Seconds Kevin Flynn Javascript Quizz</h2></header>
     <div class="card">
       <div class="card-header">
         <div class="container"> <!-- Start Container -->
           <!-- Start Kevin Flynn Row -->
           <div class="row">
-            <div class="col md-12"><img src="assets/img/jeff_bridges_the_dude_tron_legacy.jpg" title="Let's Split Man!" alt="Jeff Bridges as Kevin Flynn in TRON LEGACY" id="kevinFlynn" /></div>
+            <div id="kevinFlynn" class="col md-12">
             </div>
           </div>
           <!-- Rules Row -->
-          <div class="row">
-            <div class="col md-12" id="rulesSection">
-              <h2>Rules</h2>
+          <div class="row" id="rulesSection">
+            <div class="col md-12">
+              <h3>Rules</h3>
               <ul>
-                <li>20 Questions about Javascript.</li>
-                <li>Every incorrect answer deduces 10 seconds from the time countdown.</li>
-                <li>600 Seconds (10 minutes) to answer all 20 questions.</li>
+                <li>Each Correct Answer: +10 Pts </li>
+                <li>Each Incorrect Answer: -10 Seconds of Playing Time</li>
+                <li>300 Seconds (5 minutes) to answer all 20 questions.</li>
               </ul>
             </div>
           </div>
-          <!-- Start Button -->
-          <div class="row">
-            <div id="startButtonRow" class="col md-12" style="text-align: center;">
-                <input id="startButton" type="button" value="Start JS Quizz" style="margin-bottom: 20px;">
+          <!-- Start Button / See High Score Button -->
+          <div id="startButtonRow" class="row">
+            <div class="col md-4">
+                <input id="clearHSbutton" type="button"> <!-- Clear High Scores Button -->
+            </div>            
+            <div class="col md-4">
+                <input id="startButton" type="button"> <!-- Start Game Button -->
             </div>
+            <div class="col md-4">
+                <input id="highScoresButton" type="button"> <!-- See High Scores Button -->
+          </div>
           </div>
           <!-- End Start Button -->          
           <!-- Time / Score -->
           <div id="parameters" class="row">
-            <div class="col md-4" style="text-align: center;">
-                <h5>Time Left:<br /><span id="timer"></span></h5>
+            <div class="col md-6">
+                <h4>Time Left:<br /><span id="timer">&nbsp;</span></h4>
             </div>
-            <div class="col md-4" style="text-align: center;">
-                <h5>Score:<br /><span id="score"></span></h5>
-            </div>
-            <div class="col md-4" style="text-align: center;">
-                <h5>High Score:<br /><span id="highScore"></span></h5>
+            <div class="col md-6">
+                <h4>Score:<br /><span id="score">&nbsp;</span></h4>
             </div>
           </div>
           <!-- End Time / Score -->
               <hr>
           <!-- Questions Row -->
-          <div class="row" style="margin: 0 auto; margin-bottom: 20px;">
-            <div class="col md-12" id="quizzQuestions">[Question Section]</div>       
+          <div id="quizzQuestions" class="row">
+            <div class="col md-12">&nbsp;</div>       
           </div>
           <!-- Choices Row -->
-          <div id="userChoices" class="row" style="margin: 0 auto; margin-bottom: 20px;">
-            <div class="col md-12">            
-              <ul>
-                <li><button id="btn1" class="btn btn-danger btn-choice"><h5><span>1:</span></h5></button></li>
-                <li><button id="btn2" class="btn btn-danger btn-choice"><h5><span>2:</span></h5></button></li>
-                <li><button id="btn3" class="btn btn-danger btn-choice"><h5><span>3:</span></h5></button></li>
-                <li><button id="btn4" class="btn btn-danger btn-choice"><h5><span>4:</span></h5></button></li>
-              </ul>
-              <p><span id="solution"></span></p>
+          <div id="userChoices" class="row">
+            <div class="col md-12">
+              <hr class="separator" />
+              <ol start= "1">
+                <li class="question"><button id="btn1" class="btn btn-danger btn-choice"></button></li>
+                <li class="question"><button id="btn2" class="btn btn-danger btn-choice"></button></li>
+                <li class="question"><button id="btn3" class="btn btn-danger btn-choice"></button></li>
+                <li class="question"><button id="btn4" class="btn btn-danger btn-choice"></button></li>
+              </ol>
+              <hr class="separator" />              
             </div>
           </div>
-        </div> <!-- End Container -->
+          <!-- Solution Row -->
+          <div id="solutionContainer" class="row">
+            <div class="col md-12">
+              <p id="solution">&nbsp;</p>
+            </div>  
+          </div> <!-- End Solution Container -->
+        </div> <!-- End Main Container -->
       </div> <!-- End Card Header -->
     </div> <!-- Card -->
   <!-- </div> End Wrapper -->
