@@ -1,5 +1,7 @@
 /* JS for Kevin Flynn (TRON) Javascript Quizz */
 
+/* 2020-07-27 Code Update: JS is fully functional. */
+
 /* Questions Array [20] */
 
 var questions = [
@@ -69,11 +71,15 @@ var questions = [
 
 /* var = 'Get Document by ID' section / Screen Elements Acquisition */
 
+var hallOfFame = document.getElementById("kevinFlynn"); /* High Scores Hall of Fame over Kevin Flynn Picture */
+var clearHighScores = document.getElementById("clearHSbutton");
 var start = document.getElementById("startButton");
+var seeHighScores = document.getElementById("highScoresButton");
 var time = document.getElementById("timer");
 var scoreBoard = document.getElementById("score");
 var highScoreBoard = document.getElementById("highScore");
 var oneLiner = document.getElementById("quizzQuestions");
+var choicesContainer = document.getElementById("userChoices");
 var userChoice1 = document.getElementById("btn1");
 var userChoice2 = document.getElementById("btn2");
 var userChoice3 = document.getElementById("btn3");
@@ -83,62 +89,96 @@ During a regular game, it's used to display a response message to the player aft
 
 /* Simple Variables for Remaining Game Functions */
 
-var timeStart = false; /* This is to prevent the timer to start during page load */
-var timeMotion = true; /* This applies while the timer is in motion. When timer reacher O, timeMotion = false */
-var jsCountdown = 10; /* 10 minutes = 600 seconds */
-var score = 0; /* Start with a zero score.*/
-var highScore = 0;  /* First game starts with a zero high score.*/
-var highScores = "[]"; /* High Score storage -> Use of an array because we need to store more than a single high score */
+var timeMotion = false; /* Timer Boolean Value. False = time stops. True = Time Flows */
+var jsCountdown = ""; /* Allocated time for playing. This resets at the beginning of each game. */
+var score = ""; /* Main Score Variable, will store the score during playtime .*/
 
-    //  Deleted var, might bring it back later  ->  var output=""; --> this is for upcoming high score / initials capture
+var highScore = 0;  /* First game starts with a zero high score.*/
+var highScores = []; /* High Scores storage -> Use of an array because we need to store more than a single high score */
+var highScoresDisplayed = ""; /* This is to display the high scores inside the hall of fame */
+var playerName = ""; /* This is to store the player name when you push it into the HS array */
+
 
 let index = 0;
 /* Unified index start point for oneLiner / userChoice1-4 / answer.
-This is extremely important as it allows every function below using the index to run in sync (one after another).*/
+This is extremely important as it allows every function below using the index to run in sync (one after another). Otherwise, it would be asynchronous and prone to error. */
 
+/* Buttons from left to right */
+
+clearHighScores.value = "Clear High Scores"; /* This displays 'clear high scores' in the left button */
+start.value = "Start JS Quizz"; /* This displays the mention "start js quizz" inside the "start" (center) button ahead of the first game */
+seeHighScores.value = "See High Scores" /* This displays the mention "see high scores" in the "high score" (right) button ahead of the first game */
+
+/* Associated Buttons Click Actions */
+
+seeHighScores.addEventListener("click", function() {
+  highScoreManagement()
+}); /* This calls the see high scores function when pressed (RIGHT BUTTON) */
+
+clearHighScores.addEventListener("click", function() {
+  highScores = [];
+  hallOfFame.textContent = "Hall of Fame\n";
+}); /* This clears the high scores (hall of fame) when pressed (LEFT BUTTON) */
+
+/* This is the main start quizz button (CENTER BUTTON) */
 start.addEventListener("click", function() {
-  score = 0;  /* This also allows the score to go to zero after each game is over. */
-  jsCountdown = 10; /* This is to reset the allowed time to 10 minutes */
-  timeStart = true;
-  start.style.display = "none";
+
+  hallOfFame.style.opacity = 1; /* This is to reset Kevin Flynn's opacity at the beginning of each game if the hall of fame is then active */
+  hallOfFame.innerHTML = ""; /* This clears the hall of fame at the beginning of each game in case the player presses 'Start JS Quizz' while the hall of fame is active */
+  
+  oneLiner.style.display = "block";
+  choicesContainer.style.display = "block";
+  answer.style.display = "block";
+  /* if coming back from the game over phase, this makes the questions, choices, answer sections above visible again. */
+
+  index = 0; /* This is to reset the questionnaire when you already played once */
+  score = 0; /* This makes every game begin with a zero score  */
+  jsCountdown = 300; /* This resets the allocated time to 5 minutes when quizz starts */
+
+  timeMotion = true; /* This allows the timer to flow, false = timer off */
+  start.value = "JS Quizz Ongoing"; /* This displays the mention "JS Quizz Ongoing" inside the start button */
+  seeHighScores.value = "Show High Scores"; /* This displays the "Show High Scores" in the button in case a new game is started while coming back from the hall of fame / high scores table mode */ 
   countDownScoreHighScore(); /* Sends to function below lines 106-121 */
   questionInsert(); /* Sends to function below lines 123-126 */
 });
 
-function countDownScoreHighScore() {
-  var timerInterval = setInterval(function() {
-    if (timeStart)
-      jsCountdown--;
-      time.innerHTML = jsCountdown + " seconds";
-      scoreBoard.innerHTML = score + " Points";
-      highScoreBoard.innerHTML = highScore + " Points";
+/* This function below sets the game in motion with a countdown, disables unecessary buttons, feeds the scoreboard section and either moves onto the game mechanics (if the game is active) or sends you to the game over section if the timer reaches zero. */
 
-    if (jsCountdown === 0)
+function countDownScoreHighScore() {
+  clearHighScores.disabled = true; /* Clear High Score (LEFT) Button Disabled during Game */
+  start.disabled = true; /* Disables the start (CENTER) button while the game is in motion so that you can't restart a game before the game is over */
+  seeHighScores.disabled = true;  /* Disables the see high score (RIGHT) button during playtime so that you can't interrupt the game flow */
+  var timerInterval = setInterval(function() { /* Countdown / Timer Function */
+    if (timeMotion)
+      jsCountdown--; /* Deduces time from the timer */
+      time.innerHTML = jsCountdown + " seconds"; /* Updates the timer */
+      scoreBoard.innerHTML = score + " Points"; /* Updates the score */
+
+    if (jsCountdown <= 0) /* If Counter equal to zero or less than, clear timer and move onto the 'game over' function */
       {
-      timeStart = false;
-      timeMotion = false;
       clearInterval(timerInterval);
       gameOver();
     }
   }, 1000)
 };
 
+/* This inserts the question into the question container */
 function questionInsert() {
     oneLiner.innerHTML = questions[index].q;
     choicesInsert();
 };
 
-
+/* This fills the 4 buttons with the 4 choices of each question extracted from the array. Also, see 'showAnswer' remarks lines 164-165, 174-177 */
 function choicesInsert() {
     userChoice1.innerText = questions[index].choices.a;
     userChoice2.innerText = questions[index].choices.b;
     userChoice3.innerText = questions[index].choices.c;
     userChoice4.innerText = questions[index].choices.d;
-    console.log(score);
     /* showAnswer();
-    Uncomment if you want to see the correct answer to show below the questions during the game */
+    Uncomment the function above if you want the correct answer to show below the questions during the game */
 };
 
+/* The 4 addEventListener(s) below are assigned to the 4 potential choices of each question */
 userChoice1.addEventListener('click', function(event) {event.stopPropagation(); comparison(event)});
 userChoice2.addEventListener('click', function(event) {event.stopPropagation(); comparison(event)});
 userChoice3.addEventListener('click', function(event) {event.stopPropagation(); comparison(event)});
@@ -147,35 +187,37 @@ userChoice4.addEventListener('click', function(event) {event.stopPropagation(); 
 /* function showAnswer() {
   answer.innerText = questions[index].answer;
 }; */
-
-/* Uncomment the function above if you want the answer to show below the questions during the game*/ 
+/* Uncomment the function above if you want the answer to show below the questions during the game */
 
 function comparison(event) {
-  console.log(answer);
-  userChoiceAnswer = event.target.innerText;  
-  correctAnswer = questions[index].answer; /* Please note the NON use of a .toLowerCase() as it would derail the comparison function */
+  userChoiceAnswer = event.target.innerText;  /* Transfers the event target (button pressed) to userChoiceAnswer */
+  correctAnswer = questions[index].answer; /* Acquires the correct answer from the questions array */
+  console.log(correctAnswer); /* Displays the correct answer in the console for testing purpose */
+  /* BTW- Please note the NON use of a .toLowerCase() as it would derail the comparison function considering the amount of special characters and the importance of the Camel Cases in Javascript */
 
-    if (userChoiceAnswer === correctAnswer)
+    if (userChoiceAnswer === correctAnswer) /* Compares Player Choice with Question Answer */
       {
-        score = score + 10; /* I could have done score++ but I wanted score = score + 10 like in my early ATARI BASIC days */
+        score = score + 10; /* I could have done score++ but I wanted score = score + 10 like in my early ATARI BASIC days!! */
         answer.innerText = "Good Answer Dude! +10 Pts! Your Score: " + score + " Pts \nCorrect Answer was: " + correctAnswer;
-        setTimeout(function() {answer.innerText = "";}, 3000); /* This is to erase the response text after 5 seconds */
+        setTimeout(function() {answer.innerText = "";}, 10000); /* This is to erase the response text above every 10 seconds cycle */
       }    
 
     else
       {
-      score = score - 10;
-      jsCountdown = jsCountdown - 10;
+        jsCountdown = jsCountdown - 10; /* If wrong answer submitted, deduces 10 seconds from the countdown */
         answer.innerText = "Sorry. Wrong Answer. Your Score: " + score + " Pts. Remaining Time: " + jsCountdown + " seconds \nCorrect Answer was: " + correctAnswer;
-       setTimeout(function() {answer.innerText = "";}, 3000);
+        setTimeout(function() {answer.innerText = "";}, 10000); /* This is to erase the response text above every 10 seconds cycle */
       }
 
-    if(index >= questions.length -1) {
+    /* if out of questions, transfer game flow to the 'game over' function */
+    if (index >= questions.length -1) {
       gameOver();
     }
-    else if (timer = 0) {
+    /* if out of time, transfer game flow to the 'game over' function */
+    else if (timer <= 0) {
       gameOver();
     }
+    /* otherwise, climb one step up in the questions array and move back to the 'question insert' function */    
     else {
       index++;
       questionInsert(); 
@@ -184,14 +226,57 @@ function comparison(event) {
 };
 
 function gameOver() {
-  timer.value = "Game Over";
-  scoreBoard.innerText = score + " Points";
-  start.style.display = table;
-  start.innerText = "Play Again?";
-  timeStart = false;
+  timeMotion = false; /* This blocks the timer countdown */
+  console.log(timeMotion); /* For Testing Purpose */
+  time.innerHTML = 0 + " seconds"; /* this forces the timer to display zero seconds during the game over phase so that there's no negative time in case the player responded with a wrong answer when below the last remaining 10 seconds. Otherwise, you'd get a '-x seconds' to show.  */
+  console.log(jsCountdown); /* For Testing Purpose because of the negative timer potential */
+  start.value = "Game Over"; /* This displays a game over mention inside the main start button*/
+  oneLiner.style.display = "none"; /* This makes the question section invisible during the game over phase */
+  choicesContainer.style.display = "none"; /* This makes the choices container invisible during the game over phase */
+  answer.style.display = "none"; /* This makes the answer section invisible during the game over phase */
+  playerNameArrayPush() /* Sends to 'push' function where the player name + score string will be generated then pushed into the "highScores" array */
 };
 
-function gameReset() {
-  var jsCountdown = 600;
-  var score = 0;
+function playerNameArrayPush() {
+  playerName = prompt("Game Over\nPlease Enter Your Name"); /* Captures name of the last player to play */
+  highScores.push(" " + playerName + ": " + score + " Points"); /* This 'pushes' the player name and its score inside the 'highScores' array */
+  console.log("playerNameArrayPush: " + highScores); /* For Testing Purpose */
+  highScoreManagement(); /* This sends to the high score management function below which oversees the hall of fame */
+}
+
+function highScoreManagement() {
+  seeHighScores.value = "Hide High Scores" /* Injects 'Hide High Scores' in the high score view button */
+  hallOfFame.style.opacity = 0.5; /* Reduces the opacity of the Kevin Flynn picture by half to make text readeable */
+  hallOfFame.innerHTML = "Hall of Fame\n" /* Injects "Hall of Fame" into the High Score section so that it doesn't show empty before or during the 1st game */
+
+  highScoresDisplayed = "";
+  for (var fame = 0; fame < highScores.length; fame++) { /* Iterates through the array to churn out player names & respective scores */
+  highScoresDisplayed = "Hall of Fame\n" + highScores + " "; /* Combines hall of fame (string, text) with the indexed [hs] array */
+  /* Please note the lack of iterator above, no highScores[fame]. */
+  hallOfFame.innerHTML= highScoresDisplayed; /* Feeds the array into the html */
+  console.log("highScoresDisplayed: " + highScoresDisplayed); /* For Testing Purpose */
+  
+  if (highScores.length > 15) {
+    highScores = [];
+  } /* This clears the hall of fame board when there's more than 15 high scores */
+
+  clearHighScores.disabled = false; /* This re-enables the 'clear High Scores' button */
+  seeHighScores.disabled = false; /* This re-enables the 'see High Scores' button */
+  start.disabled = false; /* This re-enables the start button for the next game */
+  start.value = "Play Again?"; /* This displays the mention "Play Again?" instead of "Start JS Quizz" inside the start button */
+  /* Note: because the start button is re-enabled, there is no need to send to another function, the add Event Listener of the start button will do the job of restarting the game and calling the proper functions */
+  }
+
+  /* Below is a nested add event listener for the high score button so that you can alternate between the hall of fame and the regular kevin flynn picture while in the same function */
+  
+  seeHighScores.addEventListener("click", function() {
+    hallOfFame.style.opacity = 1;
+    hallOfFame.innerHTML = "";
+    seeHighScores.value = "Show High Scores";
+    seeHighScores.addEventListener("click", function() {
+      highScoreManagement()
+    }); /* This sends you back to highScoreManagement() when pressed */
+    });
 };
+
+  /* End of Code - if you have any comments or improvements, please pull from master, create your own branch from master and then push back your branch. Thank you for watching! */
