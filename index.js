@@ -138,8 +138,8 @@ start.addEventListener("click", function() {
   timeMotion = true; /* This allows the timer to flow, false = timer off */
   start.value = "JS Quizz Ongoing"; /* This displays the mention "JS Quizz Ongoing" inside the start button */
   seeHighScores.value = "Show High Scores"; /* This displays the "Show High Scores" in the button in case a new game is started while coming back from the hall of fame / high scores table mode */ 
-  countDownScoreHighScore(); /* Sends to function below lines 106-121 */
-  questionInsert(); /* Sends to function below lines 123-126 */
+  countDownScoreHighScore(); /* Sends to function below lines 147-163 */
+  questionInsert(); /* Sends to function below lines 166-169 */
 });
 
 /* This function below sets the game in motion with a countdown, disables unecessary buttons, feeds the scoreboard section and either moves onto the game mechanics (if the game is active) or sends you to the game over section if the timer reaches zero. */
@@ -168,7 +168,7 @@ function questionInsert() {
     choicesInsert();
 };
 
-/* This fills the 4 buttons with the 4 choices of each question extracted from the array. Also, see 'showAnswer' remarks lines 164-165, 174-177 */
+/* This fills the 4 buttons with the 4 choices of each question extracted from the array. Also, see 'showAnswer' remarks lines 177-178, 187-190 */
 function choicesInsert() {
     userChoice1.innerText = questions[index].choices.a;
     userChoice2.innerText = questions[index].choices.b;
