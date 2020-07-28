@@ -1,15 +1,17 @@
 # hw4-kevin-flynn-js-quizz
 
+Github Deployment Page: https://abbotkinneydude.github.io/hw4-kevin-flynn-js-quizz/
+
 **Can you beat Kevin Flynn in his own JS quizz?**
 
 Overview:
 
-• JavaScript fundamentals Quizz.
-• Respond to multiple-choice questions with a timer countdown is in action.
+• JavaScript fundamentals Quizz with Timer.
+• Respond to 20 multiple-choice questions in 5 minutes or less.
 • Dynamically updated HTML, CSS all powered by JavaScript.
 • Clean and polished user interface, responsive (mobile ready).
-• High scores Storage in the Hall of Fame.
-• Source Code heavily commented to reflect game mechanics and why choices were made.
+• High Scores stored in the Hall of Fame section (clear high scores function available).
+• Source Code heavily commented to reflect game mechanics and why certain choices were made.
 • Plain Vanilla Javascript only, no Jquery used.
 
 **Latest Revision: 2020-07-27**
