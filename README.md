@@ -35,7 +35,7 @@
 
 <p><i>Refer to index.js (javascript file) to review game mechanics and/or code dissection.</i></p>
 
-## Reference
+## References:
 <ul>
 <li>Source, Multiple Choices Questions: https://www.tutorialsteacher.com/online-test/test-result</li>
 <li>Dynamically updated HTML, CSS powered by plain vanilla JavaScript (no JQuery).</li>
