@@ -11,7 +11,7 @@
 <li>JavaScript fundamentals Quizz with multiple choices / questions answers.</li>
 <li>20 Questions total to be answered in less than 300 seconds (5 minutes).</li>
 <li>4 choices available for each question</li>
-<li>A Good answer brings an extra 10 points.</li>
+<li>A good answer brings an extra 10 points.</li>
 <li>A bad answer removes 10 points from the score and 10 seconds from the timer.</li>
 <li>When done, the player can enter his name and feature in the high score table.</li>
 <li>The high score can both be accessed and cleared when the quizz is not in action.</li>
@@ -28,8 +28,8 @@
 <li>If the question is answered inappropriately, 10 seconds are deducted from the timer and 10 points are deducted from the score.</li>
 <li>Game will end if all questions are answered (appropriately or inappropriately) or if the timer reaches 0 seconds.</li>
 <li>After each game, the player can enter his name to be featured in the high score table</li>
-<li>The High Score table can be accessed outside of game play (greyed out button during game play).
-<li>The High Score table can also be cleared via the 'clear high scores' button.</li>
+<li>The High score table can be accessed outside of game play (greyed out button during game play).
+<li>The high score table can also be cleared via the 'clear high scores' button.</li>
 <li>After a game is over and the player's initials have been submitted, a 'Play Again' button will appear</li>
 </ol>
 
