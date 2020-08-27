@@ -8,8 +8,8 @@
 
 ## Overview:
 <ul>
-<li>JavaScript fundamentals Quizz with multiple choices / questions answers.</li>
-<li>20 Questions total to be answered in less than 300 seconds (5 minutes).</li>
+<li>JavaScript fundamentals quizz with multiple choices / questions answers.</li>
+<li>20 questions total to be answered in less than 300 seconds (5 minutes).</li>
 <li>4 choices available for each question</li>
 <li>A good answer brings an extra 10 points.</li>
 <li>A bad answer removes 10 points from the score and 10 seconds from the timer.</li>
@@ -42,3 +42,14 @@
 <li>Boostrap CSS framework for a clean, responsive (mobile ready) polished user interface.</li>
 </ul>
 
+ ## License
+<p>
+<a href="./MITlicense.txt">MIT License</a> | Copyright © [2020] Pierre André Lowenstein
+</p>
+
+ ## Contact
+<p>
+<a href="http://pierreandrelowenstein.com" title="[www] Pierre Andr&eacute; Lowenstein" target="_blank">[www] pierreandrelowenstein.com</a>
+&nbsp;|&nbsp;
+<a href="mailto:soundtrackspecialist@gmail.com" title="Courriel">Send me a 'courriel'</a>
+</p>
