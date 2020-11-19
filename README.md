@@ -1,8 +1,8 @@
 ## #hw4-kevin-flynn-js-quizz
 
 <h3>Kevin Flynn Javascript Timed Quizz optimized for mobile devices (Bootstrap CSS).</h3>
-<p>Github Repository Page: https://github.com/palowenstein/hw4-kevin-flynn-js-quizz</p>
-<p>Github Deployment Page: https://palowenstein.github.io/hw4-kevin-flynn-js-quizz/</p>
+<p>Github Repository Page: https://github.com/palowenstein/kevin-flynn-js-quizz</p>
+<p>Github Deployment Page: https://palowenstein.github.io/kevin-flynn-js-quizz/</p>
 
 ![Kevin Flynn Javascript Timed Quiz (Screenshot)](./assets/img/ucla-hw4-kevin-flynn-javascript-quizz.jpg?raw=true "Kevin Flynn Javascript Timed Quiz (Screenshot)")
 
