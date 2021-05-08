@@ -1,10 +1,10 @@
-## #hw4-kevin-flynn-js-quizz
+## #4-kevin-flynn-js-quizz
 
 <h3>Kevin Flynn Javascript Timed Quizz optimized for mobile devices (Bootstrap CSS).</h3>
 <p>Github Repository Page: https://github.com/palowenstein/kevin-flynn-js-quizz</p>
 <p>Github Deployment Page: https://palowenstein.github.io/kevin-flynn-js-quizz/</p>
 
-![Kevin Flynn Javascript Timed Quiz (Screenshot)](./assets/img/ucla-hw4-kevin-flynn-javascript-quizz.jpg?raw=true "Kevin Flynn Javascript Timed Quiz (Screenshot)")
+![Kevin Flynn Javascript Timed Quiz (Screenshot)](./assets/img/4-kevin-flynn-javascript-quizz.jpg?raw=true "Kevin Flynn Javascript Timed Quiz (Screenshot)")
 
 ## Overview:
 <ul>
@@ -49,7 +49,7 @@
 
  ## Contact
 <p>
-<a href="http://pierreandrelowenstein.com" title="[www] Pierre Andr&eacute; Lowenstein" target="_blank">[www] pierreandrelowenstein.com</a>
+<a href="https://pierreandrelowenstein.com" title="[www] Pierre Andr&eacute; Lowenstein" target="_blank">[www] pierreandrelowenstein.com</a>
 &nbsp;|&nbsp;
-<a href="mailto:soundtrackspecialist@gmail.com" title="Courriel">Send me a 'courriel'</a>
+<a href="mailto:coder@pierreandrelowenstein.com" title="Courriel">Send me a 'courriel'</a>
 </p>
