@@ -142,7 +142,7 @@ start.addEventListener("click", function() {
   questionInsert(); /* Sends to function below lines 166-169 */
 });
 
-/* This function below sets the game in motion with a countdown, disables unecessary buttons, feeds the scoreboard section and either moves onto the game mechanics (if the game is active) or sends you to the game over section if the timer reaches zero. */
+/* This function below sets the game in motion with a countdown, disables unecessary buttons, feeds the scoreboard section and either moves onto the game mechanics (if the game is active) or sends you to the game over section if the timer reaches zero of if you run out of questions. */
 
 function countDownScoreHighScore() {
   clearHighScores.disabled = true; /* Clear High Score (LEFT) Button Disabled during Game */
@@ -251,11 +251,25 @@ function highScoreManagement() {
 
   highScoresDisplayed = "";
   for (var fame = 0; fame < highScores.length; fame++) { /* Iterates through the array to churn out player names & respective scores */
-  highScoresDisplayed = "Hall of Fame\n" + highScores + " "; /* Combines hall of fame (string, text) with the indexed [hs] array */
+  highScoresDisplayed = "Hall of Fame\n" + highScores; /* Combines hall of fame (string, text) with the indexed [hs] array */
   /* Please note the lack of iterator above, no highScores[fame]. */
   hallOfFame.innerHTML= highScoresDisplayed; /* Feeds the array into the html */
   console.log("highScoresDisplayed: " + highScoresDisplayed); /* For Testing Purpose */
   
+// Stringify highScoresDisplayed pour alinea?
+//  localStorage.setItem("highScoresDisplayed", highScoresDisplayed);
+
+// // Storing data:
+// myObj = {name: "John", age: 31, city: "New York"};
+// myJSON = JSON.stringify(myObj);
+// localStorage.setItem("testJSON", myJSON);
+
+// // Retrieving data:
+// text = localStorage.getItem("testJSON");
+// obj = JSON.parse(text);
+// document.getElementById("demo").innerHTML = obj.name; 
+
+
   if (highScores.length > 15) {
     highScores = [];
   } /* This clears the hall of fame board when there's more than 15 high scores */
